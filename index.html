@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Laundry Konnect</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #fff;
+      color: #222;
+      line-height: 1.65;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(56,102,255,0.06);
+    }
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 18px;
+      flex-wrap: wrap;
+    }
+    .nav-logo {
+      font-size: 1.15em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+    .nav-logo span.laundry { color: #fff; }
+    .nav-logo span.konnect { color: #19c876; margin-left: 4px; }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .nav-menu a, .phone-number {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-menu a:hover, .btn-primary:hover, .phone-number:hover {
+      color: #19c876;
+    }
+    .phone-number {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .phone-number span {
+      font-size: 1.2em;
+    }
+    .btn-primary {
+      background: #19c876;
+      color: #fff;
+      padding: 8px 24px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .btn-primary:focus {
+      outline: none;
+    }
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 12px 60px;
+      background: #fff;
+    }
+    section[id] {
+      scroll-margin-top: 72px;
+    }
+    .section-title {
+      font-size: 2rem;
+      color: #1947df;
+      text-align: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .subhead {
+      font-size: 1.07em;
+      color: #333;
+      max-width: 720px;
+      margin: 0 auto 30px;
+      font-weight: 500;
+      text-align: left;
+    }
+    /* Hero */
+    #hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 48px;
+      gap: 32px;
+    }
+    #hero .hero-image {
+      flex: 1 1 360px;
+      max-width: 440px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(25,61,190,0.2);
+    }
+    #hero .hero-image img {
+      border-radius: 14px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    #hero .hero-content {
+      flex: 1.4 1 400px;
+      min-width: 260px;
+    }
+    #hero h1 {
+      font-size: 2.6rem;
+      color: #1947df;
+      margin-bottom: 16px;
+    }
+    #hero ul {
+      list-style-type: disc;
+      padding-left: 1.2em;
+      color: #444;
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+    #hero ul li {
+      margin-bottom: 8px;
+    }
+    #hero .hero-buttons {
+      margin-top: 28px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    #hero .note {
+      margin-top: 20px;
+      font-weight: 700;
+      color: #27c177;
+      font-size: 1.06em;
+    }
+    /* Zero Cost Commitment w/ center then left subhead */
+    #zero-cost {
+      margin-bottom: 56px;
+    }
+    #zero-cost .section-title {
+      margin-bottom: 10px;
+    }
+    #zero-cost .subhead-center {
+      text-align: center;
+      color: #333;
+      font-size: 1.11em;
+      margin-bottom: 0;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #zero-cost .subhead {
+      text-align: left;
+      color: #555;
+      font-size: 1.07em;
+      margin: 24px auto 32px;
+      font-weight: 500;
+      max-width: 720px;
+    }
+    #zero-cost .zero-cost-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 28px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    #zero-cost .feature-card {
+      background: #f7fbff;
+      border-radius: 14px;
+      text-align: center;
+      padding: 28px 20px 22px;
+      box-shadow: 0 2px 6px rgb(30 62 153 / 0.07);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.22s;
+    }
+    #zero-cost .feature-card:hover {
+      box-shadow: 0 6px 18px rgb(31 62 153 / 0.14);
+    }
+    #zero-cost .feature-icon {
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 10px rgb(36 77 251 / 0.10);
+    }
+    .feature-blue { background: #1947df; color: #fff; }
+    .feature-yellow { background: #ffe176; color: #b0901e; }
+    .feature-orange { background: #ffa93b; color: #963d14; }
+    .feature-green { background: #19c876; color: #fff; }
+    #zero-cost h3 {
+      margin-bottom: 14px;
+      color: #1947df;
+      font-weight: 700;
+      font-size: 1.18em;
+    }
+    #zero-cost p {
+      color: #444;
+      font-size: 1em;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 320px;
+    }
+    /* Benefits Section */
+    #benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      width: 100%;
+      margin: 0 auto 48px;
+    }
+    #benefits .benefits-image {
+      flex: 1 1 260px;
+      max-width: 320px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(36,77,251,.08);
+    }
+    #benefits .benefits-image img {
+      width: 100%;
+      border-radius: 14px;
+      display: block;
+    }
+    #benefits .benefits-list {
+      flex: 2 1 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    #benefits .benefits-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #benefits .benefits-list li {
+      margin-bottom: 20px;
+      font-size: 1.15em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    #benefits .benefits-list li span.icon-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      width: 36px;
+      height: 36px;
+      margin-right: 14px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+    #benefits .benefits-list li .icon-blue {background: #1947df;}
+    #benefits .benefits-list li .icon-yellow {background: #ffe176; color: #b0901e;}
+    #benefits .benefits-list li .icon-orange {background: #ffa93b; color: #963d14;}
+    #benefits .benefits-list li .icon-green {background: #19c876;}
+    /* Why Students Love Us Section */
+    #why-students {
+      background: #1947df;
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+    #why-students .content-card {
+      background: #fff;
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 14px;
+      padding: 45px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(36,77,251,0.12);
+    }
+    #why-students .text-content {
+      flex: 1 1 350px;
+    }
+    #why-students h2 {
+      color: #1947df;
+      margin-bottom: 28px;
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+    #why-students ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #why-students ul li {
+      background: #eff6fc;
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 15px 20px;
+      margin-bottom: 16px;
+      color: #1947df;
+      font-size: 1.1em;
+    }
+    #why-students .image-content {
+      flex: 1 1 270px;
+      max-width: 320px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(31,62,153,0.12);
+    }
+    #why-students .image-content img {
+      width: 100%;
+      border-radius: 14px;
+      display: block;
+    }
+    /* How It Works Section */
+    #how-it-works .steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 38px;
+      justify-content: center;
+    }
+    #how-it-works .step-card {
+      background: #efeffe;
+      border-radius: 14px;
+      text-align: center;
+      padding: 32px 16px 24px 16px;
+      box-shadow: 0 1px 6px rgba(100,127,250,0.07);
+      flex: 1 1 210px;
+      max-width: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #how-it-works .step-icon {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #1947df; color: #fff;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    #how-it-works .step-card:nth-child(2) .step-icon { background: #ffe176; color: #b0901e;}
+    #how-it-works .step-card:nth-child(3) .step-icon { background: #ffa93b; color: #963d14;}
+    #how-it-works .step-card:nth-child(4) .step-icon { background: #19c876; color: #fff;}
+    #how-it-works h4 {
+      font-weight: 700;
+      color: #222d50;
+      margin-bottom: 9px;
+    }
+    #how-it-works p {
+      font-size: 1em;
+      color: #333;
+      margin: 0;
+    }
+    #how-it-works .image-center {
+      margin-top: 32px;
+      text-align: center;
+    }
+    #how-it-works .image-center img {
+      max-width: 360px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(36,77,251,0.1);
+      width: 90vw;
+      max-width: 390px;
+    }
+    /* Launch in 10 Days: All boxes blue, icons with colored circles */
+    #launch .launch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap: 32px;
+    }
+    #launch .launch-step {
+      background: #1947df;
+      border-radius: 14px;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(36,77,251,0.08);
+      text-align: center;
+      padding: 36px 24px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #launch .launch-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgb(36 77 251 / 0.10);
+      margin-bottom: 18px;
+      color: #1947df;
+      background: #fff;
+    }
+    #launch .launch-step:nth-child(2) .launch-icon { background: #ffe176; color: #b0901e;}
+    #launch .launch-step:nth-child(3) .launch-icon { background: #ffa93b; color: #963d14;}
+    #launch .launch-step:nth-child(4) .launch-icon { background: #19c876; color: #fff;}
+    #launch h4 {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 13px;
+      margin-top: 0;
+    }
+    #launch p {
+      color: #f7fbff;
+      font-weight: 500;
+      margin-bottom: 12px;
+      font-size: 1.05em;
+    }
+    #launch .days {
+      margin-top: auto;
+      font-weight: 700;
+      color: #ffe176;
+      font-size: 1.13em;
+    }
+    /* FAQ 2-column */
+    #faq {
+      display: flex;
+      gap: 38px;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1140px;
+      margin: 0 auto 60px;
+    }
+    #faq .faq-col {
+      flex: 1;
+      max-width: 480px;
+      min-width: 260px;
+    }
+    #faq .faq-header {
+      font-weight: 700;
+      font-size: 1.28em;
+      color: #1947df;
+      margin-bottom: 22px;
+      border-bottom: 2px solid #1947df;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    #faq details {
+      background: #f5f9ff;
+      border-radius: 10px;
+      border: 1px solid #cee4fd;
+      padding: 14px 22px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      font-size: 1.01em;
+    }
+    #faq details[open] { background: #edf3fe; }
+    #faq summary {
+      font-weight: 600;
+      font-size: 1.08em;
+      outline: none;
+      user-select: none;
+    }
+    #faq details[open] summary { color: #19c876; }
+    #faq details p {
+      margin-top: 10px;
+      font-size: 1em;
+      color: #34495e;
+      line-height: 1.45;
+    }
+    /* Contact/CTA Section */
+    #contact {
+      background: #f7fbff;
+      border-radius: 18px;
+      padding: 48px 38px;
+      max-width: 1140px;
+      margin: 0 auto 48px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 38px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    #contact form {
+      flex: 1 1 320px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 36px 32px;
+      box-shadow: 0 4px 16px rgba(36,77,251,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #contact form input, #contact form textarea {
+      padding: 14px 18px;
+      border-radius: 9px;
+      border: 1px solid #ccc;
+      font-size: 1.04em;
+      font-family: 'Roboto', sans-serif;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    #contact form textarea {
+      min-height: 96px;
+    }
+    #contact form button {
+      background: #19c876;
+      color: #fff;
+      padding: 14px 0;
+      font-weight: 700;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #contact form button:hover {
+      background: #148b59;
+    }
+    #contact .contact-info {
+      flex: 1 1 280px;
+      font-size: 1.06em;
+      color: #1947df;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      min-width: 270px;
+    }
+    #contact .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #contact .contact-item span {
+      font-size: 1.5em;
+      color: #19c876;
+    }
+    #contact .contact-item a {
+      color: #1947df;
+      text-decoration: none;
+      word-break: break-word;
+    }
+    #contact ul.features-list {
+      margin-top: 20px;
+      color: #19c876;
+      font-weight: 600;
+      font-size: 1em;
+      list-style: none;
+      padding-left: 0;
+    }
+    #contact ul.features-list li {
+      margin-bottom: 6px;
+    }
+    /* Newsletter Section */
+    .newsletter-section {
+      max-width: 1140px;
+      margin: 0 auto 60px;
+      padding: 36px 12px;
+      text-align: center;
+      background: #f7fbff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(36,77,251,0.05);
+    }
+    .newsletter-section h3 {
+      color: #1947df;
+      font-size: 1.88rem;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .newsletter-section p {
+      color: #333;
+      max-width: 740px;
+      margin: 0 auto 28px;
+      font-size: 1.14em;
+    }
+    .newsletter-section form {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .newsletter-section input[type="email"] {
+      font-size: 1.1em;
+      padding: 14px 18px;
+      border-radius: 9px;
+      border: 1px solid #ccc;
+      min-width: 280px;
+      max-width: 360px;
+      outline-offset: 2px;
+    }
+    .newsletter-section button {
+      background: #19c876;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 14px 30px;
+      font-weight: 700;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .newsletter-section button:hover {
+      background: #148b59;
+    }
+    .newsletter-section small {
+      color: #777;
+      display: block;
+      font-size: 0.9em;
+      margin-top: 14px;
+    }
+    /* Footer */
+    footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 26px 0 14px;
+      font-size: 1em;
+      border-radius: 0 0 18px 18px;
+    }
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto 12px;
+    }
+    .footer-sect {
+      flex: 1 1 180px;
+      min-width: 180px;
+      text-align: left;
+      padding-left: 16px;
+    }
+    .footer-sect strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.07em;
+    }
+    .footer-sect ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px 0;
+      font-size: 0.97em;
+    }
+    .footer-sect p, .footer-sect li {
+      margin: 6px 0;
+    }
+    .footer-sect a {
+      color: #19c876;
+      text-decoration: none;
+    }
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .nav-menu a, .nav-menu .phone-number { margin-left: 14px; font-size: 0.94em; }
+      .nav-logo { font-size: 1em; }
+      #hero h1 { font-size: 1.8rem; }
+    }
+    @media (max-width: 800px) {
+      .nav { flex-direction: column; align-items: stretch; padding: 8px; }
+      .nav-menu { flex-wrap: wrap; justify-content: center; }
+      #hero { flex-direction: column; }
+      main { padding: 0 8px 40px; }
+      #benefits { flex-direction: column; gap: 24px; }
+      #why-students .content-card { flex-direction: column; gap: 30px; }
+      #how-it-works .steps { flex-direction: column; gap: 26px; }
+      #launch .launch-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+      #testimonials .testimonial-cards { flex-direction: column; gap:24px;}
+      footer .footer-row { flex-direction: column; gap: 24px; }
+      #contact { flex-direction: column; padding: 28px 10px; }
+      #faq { flex-direction: column; gap: 8px;}
+    }
+    @media (max-width: 500px) {
+      .newsletter-section input[type="email"] { min-width: 120px; max-width: 92vw;}
+      .newsletter-section form { flex-direction: column; }
+      .newsletter-section button { width: 100%; }
+    }
+  </style>
+  <script>
+    function scrollToSurvey() {
+      const elm = document.getElementById('launch');
+      if(elm) elm.scrollIntoView({behavior:'smooth'});
+    }
+    function scrollToWorks() {
+      const elm = document.getElementById('how-it-works');
+      if(elm) elm.scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="nav-logo"><span class="laundry">Laundry</span><span class="konnect">Konnect</span></div>
+    <div class="nav-menu">
+      <a href="#benefits">Benefits</a>
+      <a href="#why-students">Why Students Love Us</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#launch">Launch</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <span class="phone-number"><span>☎️</span>+91-99993049207</span>
+      <button class="btn-primary" type="button">Get Started</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-image"><img src="p1.jpg" alt="Laundry Konnect Hero" /></div>
+    <div class="hero-content">
+      <h1>Revolutionize your Hostel Laundry</h1>
+      <ul>
+        <li>Zero Capital</li>
+        <li>Zero Maintenance</li>
+        <li>Zero Hassle</li>
+      </ul>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="scrollToSurvey()">Schedule Free Survey</button>
+        <button class="btn-primary" style="background:#19c876;" onclick="scrollToWorks()">Learn More</button>
+      </div>
+      <span class="note">10-Day Launch · 24/7 Support · Zero Investment</span>
+    </div>
+  </section>
+
+  <!-- Zero Cost Commitment -->
+  <section id="zero-cost">
+    <h2 class="section-title">Our Zero Cost Commitment</h2>
+    <div class="subhead-center">Experience the future of hostel laundry management without any upfront investment or ongoing maintenance costs.</div>
+    <div class="subhead">All equipment, setup costs, training, and support provided. Laundry Konnect manages all maintenance and servicing: no capital or staff required and risk-free returns.</div>
+    <div class="zero-cost-grid">
+      <div class="feature-card"><div class="feature-icon feature-blue">₹</div><h3>No Upfront Investment</h3><p>All equipment, setup, training, and support are covered. No capital expenditure needed from your hostel.</p></div>
+      <div class="feature-card"><div class="feature-icon feature-yellow">⚒️</div><h3>No Maintenance Costs</h3><p>Laundry Konnect manages all maintenance and servicing, ensuring smooth operation and minimal downtime.</p></div>
+      <div class="feature-card"><div class="feature-icon feature-orange">👤</div><h3>No Staff Required</h3><p>Automated system frees up your staff to focus on other important duties.</p></div>
+      <div class="feature-card"><div class="feature-icon feature-green">📈</div><h3>Risk-Free Returns</h3><p>Increase fill rate with no capital risk or extra workload.</p></div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits">
+    <div class="benefits-image"><img src="benefits.jpg" alt="Benefits for Hostel Owners" /></div>
+    <div class="benefits-list">
+      <h2 class="section-title" style="text-align:left;">Unmatched Benefits for Hostel Owners</h2>
+      <ul>
+        <li><span class="icon-box icon-blue">⭐</span> Elevated Hostel Image: Modernize facilities and enhance appeal.</li>
+        <li><span class="icon-box icon-yellow">😊</span> Improved Resident Experience: Reduce manual processes and free up staff.</li>
+        <li><span class="icon-box icon-orange">𝗕</span> Hassle-Free Transactions: Cashless, quick, and tech-savvy for students.</li>
+        <li><span class="icon-box icon-green">⚙️</span> Fully Managed Service: Installation, service, troubleshooting, daily operations all handled.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Why Students -->
+  <section id="why-students">
+    <div class="content-card">
+      <div class="text-content">
+        <h2>Why Hostel Students Love Us</h2>
+        <ul>
+          <li>24x7 Access: Wash clothes any time—day or night.</li>
+          <li>Fast & Hygienic Self-Service: Modern machines for quick, hygienic laundry cycles.</li>
+          <li>Affordable, Transparent Pricing: Each wash at ₹40–₹50, payable by UPI.</li>
+          <li>Personalised Washing: Clothes are washed separately with custom cycles.</li>
+        </ul>
+      </div>
+      <div class="image-content">
+        <img src="p3.jpg" alt="Students using laundry" />
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works">
+    <h2 class="section-title">Laundry Made Simple: How It Works</h2>
+    <p class="subhead">Four simple steps to revolutionize your laundry experience.</p>
+    <div class="steps">
+      <div class="step-card"><div class="step-icon">🔳</div><h4>Scan QR</h4><p>Scan the QR code on any washing machine using your smartphone.</p></div>
+      <div class="step-card"><div class="step-icon">⚙️</div><h4>Choose Program</h4><p>Select your preferred wash program and settings via the app interface.</p></div>
+      <div class="step-card"><div class="step-icon">💳</div><h4>Pay Securely</h4><p>Make secure payments through UPI for a cashless experience.</p></div>
+      <div class="step-card"><div class="step-icon">🔄</div><h4>Wash And Dry, Repeat!</h4><p>Laundry cycle begins automatically. Repeat as needed.</p></div>
+    </div>
+    <div class="image-center"><img src="P2.jpg" alt="Laundry App Interface" /></div>
+  </section>
+
+  <!-- Launch in 10 Days -->
+  <section id="launch">
+    <h2 class="section-title">Launch in Just 10 Days!</h2>
+    <p class="subhead">Getting started with Laundry Konnect is straightforward and fast.</p>
+    <div class="launch-grid">
+      <div class="launch-step"><div class="launch-icon blue">🔍</div><h4>Site Survey</h4><p>Free, no-obligation assessment of your needs and site layout.</p><div class="days">1-2 days</div></div>
+      <div class="launch-step"><div class="launch-icon yellow">✍️</div><h4>Customized Planning</h4><p>Tailored plan for machine placement and utility connections.</p><div class="days">3-5 days</div></div>
+      <div class="launch-step"><div class="launch-icon orange">🤲</div><h4>Rapid Installation</h4><p>Expert team sets up and tests all equipment.</p><div class="days">6-8 days</div></div>
+      <div class="launch-step"><div class="launch-icon green">🎓</div><h4>Training</h4><p>Staff trained for oversight; students operate easily.</p><div class="days">9-10 days</div></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <h2 class="section-title" style="color:#27c177;">What Our Clients Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <img src="client1.jpg" alt="Rajesh Kumar" class="testimonial-avatar" />
+        <div class="testimonial-name">Rajesh Kumar</div>
+        <div class="testimonial-role">Owner, Delhi Student Hostel</div>
+        <div class="testimonial-text">"Laundry Konnect transformed our hostel operations. Zero investment, maximum returns. Our occupancy rate increased by 40% after installation!"</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="client2.jpg" alt="Priya Sharma" class="testimonial-avatar" />
+        <div class="testimonial-name">Priya Sharma</div>
+        <div class="testimonial-role">Manager, Mumbai Girls Hostel</div>
+        <div class="testimonial-text">"The 24/7 automated system eliminated all our laundry-related complaints. Students love the convenience and hygiene."</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="client3.jpg" alt="Aman Singh" class="testimonial-avatar" />
+        <div class="testimonial-name">Aman Singh</div>
+        <div class="testimonial-role">Engineering Student, Bangalore</div>
+        <div class="testimonial-text">"No more waiting for the dhobi! QR code payment is convenient, and ₹45 per wash is very affordable for students."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ: Left/Right layout -->
+  <section id="faq">
+    <div class="faq-col">
+      <div class="faq-header">For Hostel Owners</div>
+      <details><summary>What are the setup costs for hostel owners?</summary><p>There are zero setup costs. Laundry Konnect covers all equipment, training, and maintenance—no upfront investment is required from your side.</p></details>
+      <details><summary>How do students pay for laundry services?</summary><p>Students pay conveniently through UPI, a secure and cashless payment system integrated into the Laundry Konnect app.</p></details>
+      <details><summary>What happens if a machine breaks down?</summary><p>Laundry Konnect provides full maintenance support. If a machine breaks down, our support team will promptly service and repair it with minimal downtime.</p></details>
+      <details><summary>How long does the installation process take?</summary><p>Installation is completed swiftly within 10 days according to our launch timeline, including setup, training, and testing.</p></details>
+      <details><summary>Do you require any staff from our end?</summary><p>No staff are required from the hostel; our system is fully automated and managed remotely by Laundry Konnect.</p></details>
+    </div>
+    <div class="faq-col">
+      <div class="faq-header">For Students</div>
+      <details><summary>How much does each wash cost?</summary><p>Each wash costs between ₹40 to ₹50, payable directly via UPI.</p></details>
+      <details><summary>Can I wash my clothes at any time?</summary><p>Yes! The laundry is open 24x7—you can use it day or night, whenever convenient.</p></details>
+      <details><summary>How do I use the machine?</summary><p>Simply scan the QR code on the washer with your phone, choose a program in the app, pay, and start the wash. Instructions are posted above every machine.</p></details>
+      <details><summary>Are the machines hygienic and safe?</summary><p>Absolutely. Our machines are regularly serviced, sanitized, and designed for maximum hygiene and safety, well-suited for student use.</p></details>
+      <details><summary>Is detergent provided, or do I bring my own?</summary><p>In most hostels, detergent is provided. Please check posted instructions or ask staff for details at your location.</p></details>
+      <details><summary>What if my laundry cycle is interrupted?</summary><p>You get regular app notifications for cycle completion. If interrupted, contact our 24/7 support for assistance and quick resolution.</p></details>
+    </div>
+  </section>
+
+  <!-- Contact/CTA -->
+  <section id="contact" class="cta-contact-section">
+    <h2 class="section-title">Ready to Transform Your Hostel?</h2>
+    <p class="subhead">Schedule your free site survey today and launch in just 10 days!</p>
+    <div class="cta-wrap">
+      <form class="cta-form" action="#" method="POST" onsubmit="alert('Form submitted!'); return false;">
+        <input type="text" name="hostelName" placeholder="Hostel Name" required />
+        <input type="text" name="ownerName" placeholder="Owner/Manager Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+        <input type="text" name="city" placeholder="City" />
+        <input type="number" name="numberOfStudents" placeholder="Number of Students" />
+        <textarea name="additionalRequirements" placeholder="Additional Requirements or Questions"></textarea>
+        <button type="submit">Schedule Free Survey</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item"><span>📧</span><div><strong>Email Us</strong><br /><a href="mailto:sales@laundrykonnect.co.in">sales@laundrykonnect.co.in</a></div></div>
+        <div class="contact-item"><span>☎️</span><div><strong>Call Us</strong><br /><a href="tel:+919993049207">+91 9993049207</a></div></div>
+        <div class="contact-item"><span>🌐</span><div><strong>Visit Our Website</strong><br /><a href="https://www.laundrykonnect.co.in" target="_blank">www.laundrykonnect.co.in</a></div></div>
+        <ul class="features-list">
+          <li>✓ 100% automated, staff-free solution</li>
+          <li>✓ 24×7 Backend Support for Smooth Operations</li>
+          <li>✓ Tired of Laundry Headaches? We solve them all!</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- Newsletter -->
+  <section class="newsletter-section">
+    <h3>Stay Updated with Hostel Industry Insights</h3>
+    <p>Get the latest updates on hostel management trends, technology innovations, and exclusive tips.</p>
+    <form onsubmit="alert('Subscribed!'); return false;" style="margin-top:10px;">
+      <input type="email" placeholder="Enter your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+    <small>No spam, unsubscribe at any time. We respect your privacy.</small>
+  </section>
+</main>
+<footer>
+  <div class="footer-row">
+    <div class="footer-sect">
+      <strong>Laundry <span style="color:#19c876;">Konnect</span></strong>
+      <p>Revolutionizing hostel laundry with zero-cost, automated solutions.<br />Experience the future of laundry management.</p>
+    </div>
+    <div class="footer-sect">
+      <strong>Services</strong>
+      <ul><li>Automated Laundry Systems</li><li>QR Code Payment</li><li>24/7 Support</li><li>Equipment Maintenance</li></ul>
+    </div>
+    <div class="footer-sect">
+      <strong>For Hostels</strong>
+      <ul><li>Zero Cost Setup</li><li>Free Site Survey</li><li>10-Day Installation</li><li>Revenue Sharing</li></ul>
+    </div>
+    <div class="footer-sect">
+      <strong>Contact</strong>
+      <p>sales@laundrykonnect.co.in</p>
+      <p>+91 9993049207</p>
+      <p><a href="https://www.laundrykonnect.co.in" style="color:#19c876; text-decoration:none;">www.laundrykonnect.co.in</a></p>
+    </div>
+  </div>
+  <div style="margin-top: 15px; font-size:0.92em; color:#8197c3;">© 2024 Laundry Konnect. All rights reserved. | Privacy Policy | Terms of Service</div>
+</footer>
+</body>
+</html>
